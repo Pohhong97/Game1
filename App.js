@@ -11,7 +11,7 @@ export default class App extends React.Component {
     scoreValue: 1,
     userChoice: "",
     botChoice: "",
-    Winner: "",
+    Winner: "-",
     botScore: 0,
     userScore: 0,
     modalVisible: false
@@ -20,7 +20,7 @@ export default class App extends React.Component {
   botDecisionFunction = () => {
     var botNum = Math.floor(Math.random() * 30) + 1;
 
-
+  
     if (botNum >= 0 && botNum <= 10) {
       this.setState({
         botChoice: "Rock"
@@ -254,9 +254,9 @@ export default class App extends React.Component {
                 <TouchableOpacity
                   onPress={() =>
                     this.setState({
-                      botChoice: "",
-                      userChoice: "",
-                      Winner: "",
+                      userChoice: "-",
+                      botChoice: "-",
+                      Winner: "-",
                       botScore: 0,
                       userScore: 0,
                     })
@@ -289,7 +289,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: "#0066CC",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column"
