@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 
 export default class App extends React.Component {
@@ -17,95 +18,97 @@ export default class App extends React.Component {
     modalVisible: false
   };
 
+
   botDecisionFunction = () => {
-    var botNum = Math.floor(Math.random() * 30) + 1;
 
-  
-    if (botNum >= 0 && botNum <= 10) {
-      this.setState({
-        botChoice: "Rock"
-      });
-    } else if (botNum >= 11 && botNum <= 20) {
-      this.setState({
-        botChoice: "Paper"
-      });
-    } else if (botNum >= 21 && botNum <= 30) {
-      this.setState({
-        botChoice: "Scissors"
-      });
-    }
+      var botNum = Math.floor(Math.random() * 30) + 1;
 
-    if (this.state.userChoice === "Rock" && botNum >= 0 && botNum <= 10) {
-      this.setState({
-        Winner: "Tie"
-      });
-    } else if (
-      this.state.userChoice === "Rock" &&
-      botNum >= 11 &&
-      botNum <= 20
-    ) {
-      this.setState({
-        Winner: "Bot",
-        botScore: this.state.botScore + 1
-      });
-    } else if (
-      this.state.userChoice === "Rock" &&
-      botNum >= 21 &&
-      botNum <= 30
-    ) {
-      this.setState({
-        Winner: "Player",
-        userScore: this.state.userScore + 1
-      });
-    }
+    
+      if (botNum >= 0 && botNum <= 10) {
+        this.setState({
+          botChoice: "Rock"
+        });
+      } else if (botNum >= 11 && botNum <= 20) {
+        this.setState({
+          botChoice: "Paper"
+        });
+      } else if (botNum >= 21 && botNum <= 30) {
+        this.setState({
+          botChoice: "Scissors"
+        });
+      }
 
-    if (this.state.userChoice === "Paper" && botNum >= 0 && botNum <= 10) {
-      this.setState({
-        Winner: "Player",
-        userScore: this.state.userScore + 1
-      });
-    } else if (
-      this.state.userChoice === "Paper" &&
-      botNum >= 11 &&
-      botNum <= 20
-    ) {
-      this.setState({
-        Winner: "Tie"
-      });
-    } else if (
-      this.state.userChoice === "Paper" &&
-      botNum >= 21 &&
-      botNum <= 30
-    ) {
-      this.setState({
-        Winner: "Bot",
-        botScore: this.state.botScore + 1
-      });
-    }
+      if (this.state.userChoice === "Rock" && botNum >= 0 && botNum <= 10) {
+        this.setState({
+          Winner: "Tie"
+        });
+      } else if (
+        this.state.userChoice === "Rock" &&
+        botNum >= 11 &&
+        botNum <= 20
+      ) {
+        this.setState({
+          Winner: "Bot",
+          botScore: this.state.botScore + 1
+        });
+      } else if (
+        this.state.userChoice === "Rock" &&
+        botNum >= 21 &&
+        botNum <= 30
+      ) {
+        this.setState({
+          Winner: "Player",
+          userScore: this.state.userScore + 1
+        });
+      }
 
-    if (this.state.userChoice === "Scissors" && botNum >= 0 && botNum <= 10) {
-      this.setState({
-        Winner: "Bot",
-        botScore: this.state.botScore + 1
-      });
-    } else if (
-      this.state.userChoice === "Scissors" &&
-      botNum >= 11 &&
-      botNum <= 20
-    ) {
-      this.setState({
-        Winner: "Player",
-        userScore: this.state.userScore + 1
-      });
-    } else if (
-      this.state.userChoice === "Scissors" &&
-      botNum >= 21 &&
-      botNum <= 30
-    ) {
-      this.setState({
-        Winner: "Tie"
-      });
-    }
+      if (this.state.userChoice === "Paper" && botNum >= 0 && botNum <= 10) {
+        this.setState({
+          Winner: "Player",
+          userScore: this.state.userScore + 1
+        });
+      } else if (
+        this.state.userChoice === "Paper" &&
+        botNum >= 11 &&
+        botNum <= 20
+      ) {
+        this.setState({
+          Winner: "Tie"
+        });
+      } else if (
+        this.state.userChoice === "Paper" &&
+        botNum >= 21 &&
+        botNum <= 30
+      ) {
+        this.setState({
+          Winner: "Bot",
+          botScore: this.state.botScore + 1
+        });
+      }
+
+      if (this.state.userChoice === "Scissors" && botNum >= 0 && botNum <= 10) {
+        this.setState({
+          Winner: "Bot",
+          botScore: this.state.botScore + 1
+        });
+      } else if (
+        this.state.userChoice === "Scissors" &&
+        botNum >= 11 &&
+        botNum <= 20
+      ) {
+        this.setState({
+          Winner: "Player",
+          userScore: this.state.userScore + 1
+        });
+      } else if (
+        this.state.userChoice === "Scissors" &&
+        botNum >= 21 &&
+        botNum <= 30
+      ) {
+        this.setState({
+          Winner: "Tie"
+        });
+      }
   };
 
   render() {
@@ -214,7 +217,7 @@ export default class App extends React.Component {
             <View style={styles.gameView}>
               <View style={styles.winBackground}>
                 <Text
-                  style={{ color: "#000", fontWeight: "900", fontSize: 20 }}
+                  style={{ color: "#000", fontWeight: "900", fontSize: 20}}
                 >
                   Choice: {this.state.botChoice}
                 </Text>
@@ -236,6 +239,12 @@ export default class App extends React.Component {
                   Lv1
                 </Text>
                 <TouchableOpacity onPress={this.botDecisionFunction}>
+                {/* <TouchableOpacity onPress={()=>{
+                  if (this.userChoice!=""){
+                    this.botDecisionFunction(true);
+                  }else Alert.alert('Select a Choice');
+          
+                }}> */}
                   <Text
                     style={{
                       color: "#fff",
@@ -294,9 +303,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column"
   },
-
   gameContainer: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -320,7 +327,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   winBackground: {
-    padding: 20,
+    padding: 0,
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
